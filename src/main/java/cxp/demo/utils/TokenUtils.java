@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import cxp.demo.utils.model.Key;
 
+import java.security.PublicKey;
 import java.security.Signature;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Base64;
@@ -54,7 +55,7 @@ public class TokenUtils {
         return new Gson().fromJson(payload, JsonObject.class);
     }
 
-    public boolean validateToken()throws Exception{
+    public boolean verifySignature()throws Exception{
         String alg = getJsonHeader().get("alg").getAsString();
         if(!alg.equals("RS256")) throw new RuntimeException("Currently this tool can only validate token signed with RS256");
         String kid = getJsonHeader().get("kid").getAsString();
@@ -63,6 +64,26 @@ public class TokenUtils {
         for (Key key : keys ) {
             if(key.getKid().equals(kid)){
                 RSAPublicKey publicKey = RsaUtils.getPublicKeyFromX5c((String) key.getX5c().toArray()[0]);
+                Signature rs256 = Signature.getInstance("SHA256withRSA");
+                rs256.initVerify(publicKey);
+                rs256.update(TokenHeader.getBytes());
+                rs256.update((byte)'.');
+                rs256.update(TokenPayload.getBytes());
+                return rs256.verify(Base64.getUrlDecoder().decode(TokenSignature));
+            }
+        }
+        return false;
+    }
+
+    public boolean verifySignature2()throws Exception{
+        String alg = getJsonHeader().get("alg").getAsString();
+        if(!alg.equals("RS256")) throw new RuntimeException("Currently this tool can only validate token signed with RS256");
+        String kid = getJsonHeader().get("kid").getAsString();
+        String tid = getJsonPayload().get("tid").getAsString();
+        List<Key> keys = AadUtils.getKeys(tid).getKeys();
+        for (Key key : keys ) {
+            if(key.getKid().equals(kid)){
+                PublicKey publicKey = RsaUtils.getPublicKeyFromEncodedModulusAndExponent(key.getN(), key.getE());
                 Signature rs256 = Signature.getInstance("SHA256withRSA");
                 rs256.initVerify(publicKey);
                 rs256.update(TokenHeader.getBytes());

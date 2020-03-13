@@ -9,6 +9,7 @@ public class App {
         System.out.println(tokenUtils.getPayload());
         System.out.println(tokenUtils.getJsonPayload());
         System.out.println(tokenUtils.getSignature());
-        System.out.println(tokenUtils.validateToken());
+        System.out.println(tokenUtils.verifySignature());
+        System.out.println(tokenUtils.verifySignature2());
     }
 }
