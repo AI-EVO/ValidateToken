@@ -62,7 +62,7 @@ public class TokenUtils {
         List<Key> keys = AadUtils.getKeys(tid).getKeys();
         for (Key key : keys ) {
             if(key.getKid().equals(kid)){
-                RSAPublicKey publicKey = RsaUtils.getPublicKeyFromX5C((String) key.getX5c().toArray()[0]);
+                RSAPublicKey publicKey = RsaUtils.getPublicKeyFromX5c((String) key.getX5c().toArray()[0]);
                 Signature rs256 = Signature.getInstance("SHA256withRSA");
                 rs256.initVerify(publicKey);
                 rs256.update(TokenHeader.getBytes());

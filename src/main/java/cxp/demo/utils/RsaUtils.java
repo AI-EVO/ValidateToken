@@ -11,7 +11,7 @@ import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
 
 public class RsaUtils {
-    public static RSAPublicKey getPublicKeyFromX5C(String x5c) throws Exception {
+    public static RSAPublicKey getPublicKeyFromX5c(String x5c) throws Exception {
         byte[] keyBytes = Base64.getDecoder().decode(x5c);
         CertificateFactory fact = CertificateFactory.getInstance("X.509");
         X509Certificate cer = (X509Certificate) fact.generateCertificate(new ByteArrayInputStream(keyBytes));
