@@ -1,0 +1,14 @@
+import cxp.demo.utils.TokenUtils;
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSIsImtpZCI6IllNRUxIVDBndmIwbXhvU0RvWWZvbWpxZmpZVSJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLndpbmRvd3MubmV0LyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2U0YzlhYjRlLWJkMjctNDBkNS04NDU5LTIzMGJhMmE3NTdmYi8iLCJpYXQiOjE1ODM5MTExNDcsIm5iZiI6MTU4MzkxMTE0NywiZXhwIjoxNTgzOTk0MjQ3LCJhY3IiOiIxIiwiYWlvIjoiQVNRQTIvOE9BQUFBMThUTExOVkM2T1hiZy9Yd2NkVC9jSVhsbTFXUHJ0TFA4MXZlUnB0Sm5Mcz0iLCJhbXIiOlsicHdkIl0sImFwcGlkIjoiMTk1MGEyNTgtMjI3Yi00ZTMxLWE5Y2YtNzE3NDk1OTQ1ZmMyIiwiYXBwaWRhY3IiOiIwIiwiZmFtaWx5X25hbWUiOiJKaWEiLCJnaXZlbl9uYW1lIjoiSmFjayIsImlwYWRkciI6IjQwLjgzLjc1LjIxNyIsIm5hbWUiOiJKYWNrIEppYSIsIm9pZCI6ImFiNmQ0Y2Q2LWZjMmQtNDBjNy1hNjc2LWY4NzczYWViZmI1ZiIsInB1aWQiOiIxMDAzM0ZGRkE1M0RDNjUzIiwic2NwIjoiNjJlOTAzOTQtNjlmNS00MjM3LTkxOTAtMDEyMTc3MTQ1ZTEwIiwic3ViIjoiWTl5THdwUzBubktUQlhlZlBjTXFKNEgyUVpFSFFkNjhWRDhFaXktRW5PbyIsInRlbmFudF9yZWdpb25fc2NvcGUiOiJOQSIsInRpZCI6ImU0YzlhYjRlLWJkMjctNDBkNS04NDU5LTIzMGJhMmE3NTdmYiIsInVuaXF1ZV9uYW1lIjoiamFja0BoYW54aWEub25taWNyb3NvZnQuY29tIiwidXBuIjoiamFja0BoYW54aWEub25taWNyb3NvZnQuY29tIiwidXRpIjoiQkZiN1ZETnhTRVdQQzdXbC1yRkJBQSIsInZlciI6IjEuMCJ9.U1gNwY2OYepNCtM-CdWRheNIst86fHFzEudup7JzTa9RPP6Adk6t3qLMHNAMJjZ67dvHjw03bAZYhAymjveU3T8IdAuiSyRbWOr9LYlzvDOEOU95s23O0NWHJ7z2l8355HcDxUix_gHFvNQ7bdICWJ2yJHw1ARwCV2x--5dGoKMz2AZh3vCvB2yfpWqFD_8eUm586nKVXPu-Ybqpxh8wGeBgSiE7RUcrylbPQrpnhxcRmNF-cpm9_479UvAz02Q3WvHXh7VWM2tuDvnEFOUpgbJTSWp0kmtD5HeZj3XNcOCWuA3QU1a_m1jDZMlf-AOTLlaD7rgRwjmmQG87yvQeHw";
+        TokenUtils tokenUtils = TokenUtils.parse(token);
+        System.out.println(tokenUtils.getHeader());
+        System.out.println(tokenUtils.getJsonHeader());
+        System.out.println(tokenUtils.getPayload());
+        System.out.println(tokenUtils.getJsonPayload());
+        System.out.println(tokenUtils.getSignature());
+        System.out.println(tokenUtils.validateToken());
+    }
+}
